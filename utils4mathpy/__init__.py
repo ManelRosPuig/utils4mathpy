@@ -1,5 +1,6 @@
 from utils4mathpy.calculator import (
-    GeneratorOptions,
+    Errors,
+    DivisorOptions,
     divisors,
     is_prime,
     factorize,

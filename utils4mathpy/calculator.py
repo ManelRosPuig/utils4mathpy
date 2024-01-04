@@ -1,62 +1,50 @@
-import math
+from math import sqrt, ceil, isqrt
 from typing import Optional
 
-class GeneratorOptions:
+class Errors:
+    ARGUMENT_NOT_VALID = "The argument must be an integer greater than 1"
 
-    def __init__(self, limit: int = 0, reverse: bool = False):
+class DivisorOptions:
+    def __init__(self, limit: int = 0, reverse: bool = False, include_self: bool = True, include_one: True = False):
         self.limit = limit
         self.reverse = reverse
+        self.include_self = include_self
+        self.include_one = include_one
 
-def divisors(n: int, opts: Optional[GeneratorOptions] = None) -> list[int]:
+def divisors(n: int, opts: Optional[DivisorOptions] = DivisorOptions()) -> list[int]:
+
+    if not isinstance(n, int) or n <= 1:
+        raise TypeError(Errors.ARGUMENT_NOT_VALID)
+
+    opts = opts or DivisorOptions()
+
+    numbers = []
+
+    if opts.include_one is True:
+        numbers += [1]
     
-    '''
-    Returns a list of divisors of a given number.
+    numbers += [i for i in range(2, n) if n % i == 0]
 
-    Parameters
-    ----------
-    n : int
-        The number to be factored.
-    opts : GeneratorOptions
-        The options for the generator.
-
-    Returns
-    -------
-    list
-        A list of divisors of a given number.
-
-    Examples
-    --------
-    >>> divisors(20)
-    [2, 4, 5, 10]
-    >>> divisors(20, GeneratorOptions(limit = 1))
-    [2]
-    >>> divisors(20, GeneratorOptions(limit = 1, reverse = True))
-    [10]
-    '''
-
-    if (opts == None):
-        opts = GeneratorOptions()
-
-    numbers = [i for i in range(2, n) if n % i == 0]
-
-    if (opts.reverse == True):
+    if opts.include_self is True:
+        numbers.append(n)
+    
+    if opts.reverse is True:
         numbers.sort(reverse = True)
 
-    if (opts.limit == 0):
+    if opts.limit == 0:
         return numbers
     
     return numbers[:opts.limit]
 
-def is_prime(x: int):
+def is_prime(n: int) -> bool:
 
-    if (type(x) != int):
-        raise TypeError("The argument must be a natural number.")
-
-    if (x <= 1):
-        return False
-    for i in divisors(x):
-        if(x % i == 0):
+    if not isinstance(n, int) or n <= 1:
+        raise TypeError(Errors.ARGUMENT_NOT_VALID)
+        
+    for i in divisors(n, DivisorOptions(include_self = False)):
+        if n % i == 0:
             return False
+
     return True
 
 def factorize(n: int):
@@ -64,10 +52,10 @@ def factorize(n: int):
     for i in numbers:
         None
 
-def sieve(n: int):
+def sieve(n: int) -> list[int]:
     numbers = [i for i in range(2, n + 1)]
-    for i in range(2, math.ceil(math.sqrt(n))):
+    for i in range(2, ceil(sqrt(n))):
         if numbers[i - 2] != 0:
-            for j in range(i, math.ceil(n / i)):
+            for j in range(i, ceil(n / i)):
                 numbers[j * i - 2] = 0
     return [i for i in numbers if i != 0]

@@ -1,7 +1,10 @@
-from utils4mathpy import is_prime, divisors
+import coverage
 
-print(is_prime(5))
-print(divisors(20))
+from utils4mathpy import divisors, is_prime, DivisorOptions
 
-print(is_prime(-1))
-print(divisors(-20))
+print(divisors(3, DivisorOptions(
+    limit = 0,
+    reverse = False,
+    include_self = True,
+    include_one = True
+)))
