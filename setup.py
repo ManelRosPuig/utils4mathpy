@@ -13,6 +13,15 @@ setup(
     long_description_content_type = "text/markdown",
     packages = find_packages(),
     install_requires = [],
-    keywords = ['python', 'math', 'tools', 'numbers', 'prime numbers', 'utils4mathpy', 'divisors', 'factorize'],
+    keywords = [
+        'python',
+        'math',
+        'tools',
+        'numbers',
+        'prime numbers',
+        'utils4mathpy',
+        'divisors',
+        'factorize'
+    ],
     classifiers = []
 )

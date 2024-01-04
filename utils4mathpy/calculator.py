@@ -34,12 +34,6 @@ def divisors(n: int, opts: Optional[GeneratorOptions] = None) -> list[int]:
     [10]
     '''
 
-    # numbers = []
-
-    # for i in [i for i in range(2, n)]:
-    #     if (n % i == 0):
-    #         numbers.append(i)
-
     if (opts == None):
         opts = GeneratorOptions()
 
@@ -54,8 +48,15 @@ def divisors(n: int, opts: Optional[GeneratorOptions] = None) -> list[int]:
     return numbers[:opts.limit]
 
 def is_prime(x: int):
+
+    if (type(x) != int):
+        raise TypeError("The argument must be a natural number.")
+
+    if (x <= 1):
+        return False
     for i in divisors(x):
-        if(x % i == 0): return False
+        if(x % i == 0):
+            return False
     return True
 
 def factorize(n: int):
