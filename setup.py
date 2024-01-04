@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.0.3'
+VERSION = '0.0.5'
 DESCRIPTION = 'Math tools package for python'
 
 # Setting up
