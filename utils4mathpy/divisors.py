@@ -1,10 +1,6 @@
-from utils4mathpy import invalid_int_greater_than
-
 from utils4mathpy.divisors_options import DivisorsOptions
 
 def divisors(n: int, opts: DivisorsOptions = None) -> list[int]:
-    if not isinstance(n, int) or n <= 1:
-        raise TypeError(invalid_int_greater_than(1))
     opts = opts or DivisorsOptions()
     numbers = []
     if opts.include_one is True:
